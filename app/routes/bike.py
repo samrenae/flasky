@@ -21,20 +21,20 @@ def add_bike():
 
     return {"id": new_bike.id}, 201
 
-# @bike_bp.route("", methods=["GET"])
-# def get_all_bikes():
-#     bikes = Bike.query
-#     response = []
-#     for bike in bikes:
-#         bike_dict = {
-#             "id": bike.id,
-#             "name": bike.name,
-#             "price": bike.price,
-#             "size": bike.size,
-#             "type": bike.type
-#         }
-#         response.append(bike_dict)
-#     return jsonify(response), 200
+@bike_bp.route("", methods=["GET"])
+def get_all_bikes():
+    bikes = Bike.query.all()
+    response = []
+    for bike in bikes:
+        bike_dict = {
+            "id": bike.id,
+            "name": bike.name,
+            "price": bike.price,
+            "size": bike.size,
+            "type": bike.type
+        }
+        response.append(bike_dict)
+    return jsonify(response), 200
 
 # @bike_bp.route("/<bike_id>", methods=["GET"])
 # def get_one_bike(bike_id):
