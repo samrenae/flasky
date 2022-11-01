@@ -38,7 +38,13 @@ def add_bike():
 
 @bike_bp.route("", methods=["GET"])
 def get_all_bikes():
-    bikes = Bike.query.all()
+    name_param = request.args.get("name")
+
+    if name_param is None:
+        bikes = Bike.query.all()
+    else:
+        bikes = Bike.query.filter_by(name=name_param)
+        
     response = []
     for bike in bikes:
         bike_dict = {
@@ -96,3 +102,7 @@ def delete_one_bike(bike_id):
     db.session.commit()
 
     return jsonify({"message": f"Successfully deleted bike with id `{bike_id}`"}), 200
+
+#Nov 1st
+#Add Query params
+
