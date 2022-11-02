@@ -16,7 +16,7 @@ def get_one_bike_or_abort(bike_id):
 
     if matching_bike is None:
         response_str = f"Bike with id `{bike_id}` was not found in the database."
-        abort(make_response(jsonify({"message":response_str}), 400))
+        abort(make_response(jsonify({"message":response_str}), 404))
     
     return matching_bike
 
@@ -44,7 +44,7 @@ def get_all_bikes():
         bikes = Bike.query.all()
     else:
         bikes = Bike.query.filter_by(name=name_param)
-        
+
     response = []
     for bike in bikes:
         bike_dict = {
